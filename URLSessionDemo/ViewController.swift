@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         let request = URLRequest(url: url!)
         //3、创建URLSession会话实例 可以使用URLSession.shared返回一个共享的会话，该会话使用全局的Cache、Cookie和证书
         //4、使用创建好的URLSession实例和URLrequset实例创建一个URLSessionTask
-        let dataTask = URLSession.shared.dataTask(with: request){data,responese,error in
+        /*let dataTask = URLSession.shared.dataTask(with: request){data,responese,error in
             if error != nil {
             print(error.debugDescription)
             }else{
@@ -26,10 +26,19 @@ class ViewController: UIViewController {
                 print(str!)
                 
             }
-        }as URLSessionTask
-        dataTask.resume()
-    }
+        }as URLSessionTask*/
+        let downloadTask = URLSession.shared.downloadTask(with: request){location,responese,error in
+            if error != nil {
+                print(error.debugDescription)
+            }else{
+                
+                print(location!.path)
+                
+            }
+            }as URLSessionTask
 
+        downloadTask.resume()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
